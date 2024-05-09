@@ -1,0 +1,73 @@
+newxml.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text\xsl" href="newstyle.xsl"?>
+<products>
+    <product>
+            <name>pen</name>
+            <category>stationary</category>
+            <price>10</price>
+            <available>yes</available>
+    </product>
+<product>
+            <name>pencil</name>
+            <category>stationary</category>
+            <price>5</price>
+            <available>yes</available>
+    </product>
+     <product>
+            <name>teddy</name>
+            <category>toy</category>
+            <price>200</price>
+            <available>no</available>
+    </product>
+     <product>
+            <name>mobile</name>
+            <category>electronics</category>
+            <price>10000</price>
+            <available>yes</available>
+    </product>
+     <product>
+            <name>laptop</name>
+            <category>electronics</category>
+            <price>1000000</price>
+            <available>no</available>
+    </product>
+</products>
+newstyle.xsl
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+ <xsl:template match="/">
+        <html>
+            <head>
+                <title>Product List</title>
+                <style type="text/css">
+                    tr.highlight {
+                        background-color: yellow;
+                    }
+                    tr:nth-child(even){
+                        background-color:#f2f2f2;
+                    }
+                </style>
+            </head>
+            <body>
+                <center>
+                <h2>Product List</h2>
+                <table border="1">
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                    <xsl:apply-templates select="products/product"/>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+    <xsl:template match="product">
+        <xsl:if test="price &gt; 50">
+            <tr class="highlight">
+                <td><xsl:value-of select="name"/></td>
+                <td><xsl:value-of select="price"/></td>
+            </tr>
+        </xsl:if>
+    </xsl:template>
+</xsl:stylesheet>
